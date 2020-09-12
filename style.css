@@ -31,3 +31,9 @@ body{
 .historical_search{
     margin-top: 20px;
 }
+
+#city {
+    height: 38px;
+    font-size: 18px;
+
+}

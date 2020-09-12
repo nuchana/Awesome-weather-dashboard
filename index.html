@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
@@ -18,7 +20,8 @@
 
     <div class="jumbotron jumbotron-fluid" id="dashboard">
         <div class="container">
-            <h1 class="display-4 text-center"><img src="images/weather logo.png" class="img-responsive" id="weather-logo" alt="">Weather Dashboard </h1>
+            <h1 class="display-4 text-center"><img src="images/weather logo.png" class="img-responsive"
+                    id="weather-logo" alt="">Weather Dashboard </h1>
             <h2 class="lead text-center">Plan your trips smartly.</h2>
         </div>
     </div>
@@ -26,13 +29,20 @@
     <div class="container col-lg-11">
         <div class="row">
             <div class="col-md-4 content">
-                <div class="col">
-                    <input type="text" placeholder="Search for a city" autofocus>
-                    <button class="search">Search
+                <div class="col-lg-12" id="cityDiv">
+                    <input type="text" id="city" placeholder="Search for a city" autofocus>
+                    <button id="submitCity" class="btn btn-primary">Search
                         <span class="icon-bar"></span>
                     </button>
+                    
+                    <div id="error"></div>
+                    <div id="showWeather"></div>
+
 
                 </div>
+
+
+
 
                 <div class="col">
                     <ul class="list-group historical_search">
@@ -61,7 +71,7 @@
 
                         </ul>
 
-                        
+
 
 
                     </div>
@@ -115,13 +125,7 @@
     </div>
 
 
-
-    </div>
-
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="weather.js"></script>
 </body>
 
 </html>
