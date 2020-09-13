@@ -1,56 +1,86 @@
 $(document).ready(function () {
 
     // create/listen to click event for city search
-    $("#submitCity").click(function () {
+    $("#submitCity").on("click", function () {
         return getWeather();
 
     });
 
-});
+    $(".history").on("li", function () {
+        return makeRow();
 
-function getWeather() {
-    // get the value of input field
-    var city = $("#city").val();
-    // we want to make sure our input filed is not empty, then we can request the data
-    if (city != '') {
-        $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=metric" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
-            method: "GET"
-
-        })
-            // After the data from AJAX comes back, we show the weather
-            .then(function (data) {
-                //console.log(data)
-                var weatherResults = showResults(data)
-                // pass the result into showWeather id
-                $("#showWeather").html(weatherResults);
-        
-                // empty the input field
-                $("#city").val('');
+    });
 
 
-
-            });
+    function makeRow() {
+        console.log(makeRow)
+        var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
+        $(".history").append("li");
 
     }
-    // alert that the input field can't be empty
-    else {
-        $("#error").html("<div>City field can't be empty!</div>");
+
+    function getWeather() {
+        // get the value of input field
+        var city = $("#city").val();
+        // we want to make sure our input filed is not empty, then we can request the data
+        if (city != '') {
+            $.ajax({
+                url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=metric=imperial" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
+                method: "GET"
+
+            })
+                // After the data from AJAX comes back, we show the weather
+                .then(function (data) {
+                    //console.log(data)
+                    var weatherResults = showResults(data)
+                    // pass the result into showWeather id
+                    $("#showWeather").html(weatherResults);
+
+                    // empty the input field
+                    $("#city").val('');
+
+
+
+                });
+
+        }
+        // alert that the input field can't be empty
+        // else {
+        //     $("#error").html("<div>City field can't be empty!</div>");
+        // }
+
     }
+    // show the weather resutls based on its parameter
+    function showResults(data) {
+        // console.log(data)
 
-}
-// show the weather resutls based on its parameter
-function showResults(data){
-    // console.log(data)
-
-    // display results and add weather icon
-    return"<h3>"+data.name+" <img src='http://openweathermap.org/img/wn/"+data.weather[0].icon+".png'></h3>"+
-        "<p>Temperature: "+data.main.temp+" &deg;C</p>"+
-        "<p>Humidity: "+data.main.humidity+"</p>"+
-        "<p>Wind Speed: "+data.wind.speed+"</p>";
+        // display results and add weather icon
+        return "<h3>" + data.name + " <img src='http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png'></h3>" +
+            "<p>Temperature: " + data.main.temp + " &deg;C</p>" +
+            "<p>Humidity: " + data.main.humidity + "</p>" +
+            "<p>Wind Speed: " + data.wind.speed + "</p>";
         //"<p>UV Index: have to pay some fees
 
-}
+    }
+
+    // get current histor if any
+    var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    // console.log(history)
+    if (history.length > 0) {
+        getWeather(history[0]);
+        
+    }
+
+    for (var i = 0; i < history.length; i++) {
+        makeRow(history[i]);
+    }
+
+
+
+});
+
+
+
 
 // var queryURL = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}"
 
