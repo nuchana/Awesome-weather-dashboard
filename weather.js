@@ -35,18 +35,19 @@ function getWeather() {
     }
     // alert that the input field can't be empty
     else {
-        $("#error").html("<div>City field can't be empty</div>");
+        $("#error").html("<div>City field can't be empty!</div>");
     }
 
 }
 // show the weather resutls based on its parameter
 function showResults(data){
-    console.log(data)
+    // console.log(data)
 
-    return"<h3>"+data.name+" <img src='http://openweathermap.org/img/wn/10d@2x.png'></h3>"+
-        "<p>Temperature:"+data.main.temp+" &deg;F</p>"+
-        "<p>Humidity:"+data.main.humidity+"</p>"+
-        "<p>Wind Speed:"+data.wind.speed+"</p>";
+    // display results and add weather icon
+    return"<h3>"+data.name+" <img src='http://openweathermap.org/img/wn/"+data.weather[0].icon+".png'></h3>"+
+        "<p>Temperature: "+data.main.temp+" &deg;C</p>"+
+        "<p>Humidity: "+data.main.humidity+"</p>"+
+        "<p>Wind Speed: "+data.wind.speed+"</p>";
         //"<p>UV Index: have to pay some fees
 
 }
