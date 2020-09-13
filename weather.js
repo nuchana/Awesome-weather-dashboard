@@ -11,14 +11,12 @@ $(document).ready(function () {
 
     });
 
-
-
     // when history list click, function makeRow is called
     function createRow(searchValue) {
 
         console.log(searchValue)
-        var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
-        $(".history").append("li");
+        var li = $("<li>").addClass("list-group-item list-group-item-action").text(searchValue);
+        $(".history").append(li);
 
     };
 
@@ -29,7 +27,6 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/weather?q=' + searchValue + "&units=imperial" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
             method: "GET",
-            dataType: "json",
 
         })
             // After the data from AJAX comes back, we show the weather
@@ -43,8 +40,24 @@ $(document).ready(function () {
                     createRow(searchValue);
                 }
 
+                // clear any old content
+                $("#today").empty();
 
+                // create html content for today weather
+                var card = $("<div>").addClass("card");
+                var body = $("<div>").addClass("card-body");
+                var title = $("<h3>").addClass("card-title").text(data.name);
+                var image = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png");
+                var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "F");
+                var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity +"%");
+                var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + "MPH");
 
+                // merge and add to the page
+                card.append(body);
+                title.append(image);
+                body.append(title, temp, humidity, wind);
+                $("#today").append(card);
+               
 
             });
 
