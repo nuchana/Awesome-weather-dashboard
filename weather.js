@@ -14,24 +14,27 @@ $(document).ready(function () {
 
 
     // when history list click, function makeRow is called
-    function createRow() {
-        console.log(createRow)
+    function createRow(searchValue) {
+
+        console.log(searchValue)
         var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
         $(".history").append("li");
 
     };
 
     function getWeather(searchValue) {
+        var searchValue = $("#city").val();
         // make a request to API openweahtermap
+        // console.log(searchValue)
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + searchValue + "&units=imperial + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
+            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + searchValue + "&units=imperial" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
             method: "GET",
             dataType: "json",
 
         })
             // After the data from AJAX comes back, we show the weather
             .then(function (data) {
-                console.log(data)
+            
                 //create history link for this search
                 if (history.indexOf(searchValue) === -1) {
                     history.push(searchValue);
@@ -56,7 +59,7 @@ $(document).ready(function () {
     }
 
     for (var i = 0; i < history.length; i++) {
-        makeRow(history[i]);
+        createRow(history[i]);
     }
 
 });
