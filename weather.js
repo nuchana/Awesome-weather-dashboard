@@ -14,15 +14,21 @@ function getWeather() {
     // we want to make sure our input filed is not empty, then we can request the data
     if (city != '') {
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&unit=metric" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
+            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=metric" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
             method: "GET"
 
         })
             // After the data from AJAX comes back, we show the weather
             .then(function (data) {
-                console.log(data)
+                //console.log(data)
+                var weatherResults = showResults(data)
+                // pass the result into showWeather id
+                $("#showWeather").html(weatherResults);
+        
+                // empty the input field
+                $("#city").val('');
 
-                $("#showWeather").html();
+
 
             });
 
@@ -31,6 +37,17 @@ function getWeather() {
     else {
         $("#error").html("<div>City field can't be empty</div>");
     }
+
+}
+// show the weather resutls based on its parameter
+function showResults(data){
+    console.log(data)
+
+    return"<h3>"+data.name+" <img src='http://openweathermap.org/img/wn/10d@2x.png'></h3>"+
+        "<p>Temperature:"+data.main.temp+" &deg;F</p>"+
+        "<p>Humidity:"+data.main.humidity+"</p>"+
+        "<p>Wind Speed:"+data.wind.speed+"</p>";
+        //"<p>UV Index: have to pay some fees
 
 }
 
