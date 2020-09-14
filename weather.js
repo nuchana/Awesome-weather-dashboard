@@ -72,7 +72,7 @@ $(document).ready(function () {
     }
 
     function getForecast(searchValue) {
-        var searchValue = $("#city").val();
+        //var searchValue = $("#city").val();
         // console.log(searchValue)
         // make a request to API openweahtermap
         $.ajax({
@@ -89,15 +89,16 @@ $(document).ready(function () {
 
             // loop over all forecasts by 3-hour increments
             for (var i = 0; i = data.list.length; i++) {
+               
                 if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-
+                    console.log(data)
                     // create HTML for forecast row
                     var col = $("<div>").addClass("col-md-2");
-                    var card = $("<div>").addClass("bg-primary text-white");
-                    var body = $("<div>").addClass("card-body");
-                    var title = $("<h3>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
+                    var card = $("<div>").addClass("card bg-primary text-white");
+                    var body = $("<div>").addClass("card-body p-2");
+                    var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
                     var image = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.list[i].weather.icon + ".png");
-                    var temp = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp + "F");
+                    var temp = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp + "F");
                     var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
 
                     // merge and add to the page
