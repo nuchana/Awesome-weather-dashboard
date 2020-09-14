@@ -24,15 +24,6 @@ body{
 
 
 
-
-
-#error{
-    color: red;
-    font-style: italic;
-}
-
-
-
 .forecast{
     margin-left: auto;
     margin-right: auto;
