@@ -94,6 +94,7 @@ $(document).ready(function () {
                 if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
                     console.log(data)
                     // create HTML for forecast row
+    
                     var col = $("<div>").addClass("col-md-2");
                     var card = $("<div>").addClass("card bg-primary text-white");
                     var body = $("<div>").addClass("card-body p-2");
@@ -104,10 +105,11 @@ $(document).ready(function () {
 
             
                     // merge and add to the page
+            
                     col.append(card);
                     card.append(body);
                     body.append(title, image, temp, humidity);
-                    $("#forecast.row").append(col);
+                    $("#forecast").append(col);
 
                 }
 
