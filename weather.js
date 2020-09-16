@@ -96,9 +96,9 @@ $(document).ready(function () {
                         // console.log(data)
                         // create HTML for forecast row
 
-                        var col = $("<div>").addClass("col-sm-3");
+                        var col = $("<div>").addClass("col-sm-2");
                         var card = $("<div>").addClass("card bg-primary text-white");
-                        var body = $("<div>").addClass("card-body p-4");
+                        var body = $("<div>").addClass("card-body p-2");
                         var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
                         var image = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + ".png");
                         var temp = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp + "F");
@@ -167,7 +167,7 @@ $(document).ready(function () {
 var history = JSON.parse(window.localStorage.getItem("history")) || [];
 // console.log(history)
 if (history.length > 0) {
-   // getWeather(history[0]);
+   getWeather(history[0]);
 }
 
 for (var i = 0; i < history.length; i++) {
