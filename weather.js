@@ -24,18 +24,19 @@ $(document).ready(function () {
 
         // create a var and assign the value received back from API
         var searchValue = $("#city").val();
-
+        
         // make a request to API openweahtermap
         // console.log(searchValue)
         $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/weather?q=' + searchValue + "&units=imperial" + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd",
             method: "GET",
-
+            
         })
 
 
             // After the data from AJAX comes back, we show the weather
             .then(function (data) {
+            //console.log(data)
 
                 //create history link for this search
                 if (history.indexOf(searchValue) === -1) {
@@ -43,7 +44,7 @@ $(document).ready(function () {
                     window.localStorage.setItem("history", JSON.stringify(history));
 
                     createRow(searchValue);
-                }
+                } 
 
                 // clear any old content
                 $("#today").empty();
@@ -123,10 +124,10 @@ $(document).ready(function () {
 
     function getUVIndex(lat, lon) {
         //var searchValue = $("#city").val();
-        console.log(lat, lon)
+        // console.log(lat, lon)
         // make a request to API openweahtermap
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/uvi?&appid=4c023acf398932e1b43cd03002ad8542',
+            url: 'http://api.openweathermap.org/data/2.5/uvi?&appid=4c023acf398932e1b43cd03002ad8542'+ searchValue + "&lon: 16.37, lat: 48.21",
             method: "GET",
         
         })
@@ -137,11 +138,11 @@ $(document).ready(function () {
             var uvIndex = $("<p>").text("UV Index: ");
             var btn = $("<span>").addClass("btn btn-sm").text(data.value);
 
-            If(data.value <= 2) {
+            if(data.value <= 2) {
                 btn.addClass("btn-success");
             } 
 
-            else if(data.value <= 5) {
+            else if (data.value <= 5) {
             btn.addClass("btn-warning");
 
         } 
