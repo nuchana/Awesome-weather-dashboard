@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // create/listen to click event for city search and history
     $("#submitCity").on("click", function () {
-        return getWeather();
+     return getWeather();
 
     });
 
@@ -123,11 +123,15 @@ $(document).ready(function () {
     }
 
     function getUVIndex(lat, lon) {
+        // template literal
+        // console.log(`lat = ${lat} lon= ${lon}`)
+        // console.log('lat='+ lat + 'lon=' + lon)
         //var searchValue = $("#city").val();
         // console.log(lat, lon)
         // make a request to API openweahtermap
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/uvi?&appid=4c023acf398932e1b43cd03002ad8542'+ searchValue + "&lon: 16.37, lat: 48.21",
+            url: 'http://api.openweathermap.org/data/2.5/uvi?' + "&appid=8dd0ab36dd50a97450eb53bfcb6ca7dd" + 
+            '&lat=' + lat + '&lon=' + lon,
             method: "GET",
         
         })
@@ -148,10 +152,10 @@ $(document).ready(function () {
         } 
         
             else {
-            addClass("btn-danger");
+            btn.addClass("btn-danger");
         }
 
-        $("#today .card-body").append(uv.append(btn));
+        $("#today .card-body").append(uvIndex.append(btn));
 
     });
 
@@ -163,7 +167,7 @@ $(document).ready(function () {
 var history = JSON.parse(window.localStorage.getItem("history")) || [];
 // console.log(history)
 if (history.length > 0) {
-    getWeather(history[0]);
+   // getWeather(history[0]);
 }
 
 for (var i = 0; i < history.length; i++) {
