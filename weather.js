@@ -36,7 +36,7 @@ $(document).ready(function () {
 
             // After the data from AJAX comes back, we show the weather
             .then(function (data) {
-            //console.log(data)
+            console.log(data)
 
                 //create history link for this search
                 if (history.indexOf(searchValue) === -1) {
@@ -50,13 +50,12 @@ $(document).ready(function () {
                 $("#today").empty();
 
                 // create html content for today weather
-
                 var card = $("<div>").addClass("card");
                 var body = $("<div>").addClass("card-body");
-                var title = $("<h3>").addClass("card-title").text(data.name + "(" + new Date().toLocaleDateString() + ")");
+                var title = $("<h3>").addClass("card-title").text(data.name);
                 var image = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png");
                 var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "F");
-                var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
+                var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity +"%");
                 var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + "MPH");
 
                 // merge and add to the page
@@ -64,6 +63,7 @@ $(document).ready(function () {
                 title.append(image);
                 body.append(title, temp, humidity, wind);
                 $("#today").append(card);
+               
 
                 // move to the next fuction 
                 getForecast(searchValue);
